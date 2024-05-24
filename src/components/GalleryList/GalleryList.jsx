@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import GalleryItem from '../GalleryItem/GalleryItem';
+import Box from '@mui/joy/Box';
 
 export default function GalleryList() {
   const [gallery, setGallery] = useState([]);
@@ -17,7 +18,10 @@ export default function GalleryList() {
   }
 
   return (
-    <div>
+    <Box
+      component='ul'
+      sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 8 }}
+    >
       {gallery.map((item) => (
         <GalleryItem
           key={item.id}
@@ -25,6 +29,6 @@ export default function GalleryList() {
           fetchGallery={fetchGallery}
         />
       ))}
-    </div>
+    </Box>
   );
 }
