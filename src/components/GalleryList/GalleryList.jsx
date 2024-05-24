@@ -22,6 +22,7 @@ export default function GalleryList() {
         <GalleryItem
           key={item.id}
           item={item}
+          fetchGallery={fetchGallery}
         />
       ))}
     </div>

@@ -1,7 +1,18 @@
 import { useState } from 'react';
+import axios from 'axios';
 
-export default function GalleryItem({ item }) {
+export default function GalleryItem({ item, fetchGallery }) {
   const [toggleDescription, setToggleDescription] = useState(false);
+
+  async function incrementLikes(id) {
+    try {
+      await axios.put(`/api/gallery/like/${id}`);
+      fetchGallery();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
   return (
     <>
       {toggleDescription === true ? (
@@ -18,7 +29,11 @@ export default function GalleryItem({ item }) {
           onClick={() => setToggleDescription(!toggleDescription)}
         ></img>
       )}
-      <p> Likes: {item.likes}</p>
+      <p>
+        {' '}
+        Likes: {item.likes}{' '}
+        <button onClick={() => incrementLikes(item.id)}>Like</button>
+      </p>
     </>
   );
 }
